@@ -1,0 +1,153 @@
+.Calculator {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.SectionHeader {
+  color: var(--text-secondary-colour);
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.SectionHeader h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.sectionheader-text-container {
+  border-left: 2px solid var(--divider-colour);
+  padding-left: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.Question {
+  border-top: 1px solid var(--divider-colour);
+  border-bottom: 1px solid var(--divider-colour);
+  box-sizing: border-box;
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+
+.Question h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.Question fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.Question .question-header > h3::before {
+  content: "▼";
+  margin-left: -1px;
+  margin-right: 10px;
+  color: var(--text-colour);
+  display: inline-block;
+  transition: transform 0.2s linear;
+}
+
+.Question.collapsed .question-header > h3::before {
+  transform: rotate(-90deg);
+}
+
+.Question.collapsed .question-body {
+  display: none;
+}
+
+.Question .question-header {
+  cursor: pointer;
+}
+
+.Question .question-header:hover {
+  text-decoration: underline 1px;
+  text-underline-offset: 2px;
+}
+
+.Guidance {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.Guidance summary {
+  color: var(--accent-colour);
+  cursor: pointer;
+}
+
+.Guidance summary:hover {
+  color: var(--accent-colour);
+  text-decoration: underline 1px;
+  text-underline-offset: 2px;
+}
+
+.Guidance .guidance-details {
+  border-left: 2px solid var(--divider-colour);
+  padding-left: 10px;
+  margin-top: 10px;
+  color: var(--text-secondary-colour);
+}
+
+.QuestionOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.QuestionOption input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--text-colour);
+  /* transition: 0.2s all linear; */
+  margin: 0;
+  margin-right: 10px;
+  display: grid;
+  place-content: center;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.QuestionOption input[type="radio"]::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transform: scale(0);
+  box-shadow: inset 20px 20px var(--accent-colour);
+}
+
+.QuestionOption input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+.QuestionOption label {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.ScoreImpactLabel {
+  font-size: 14px;
+  text-align: right;
+  min-width: 50px;
+  max-width: 50px;
+  color: var(--text-secondary-colour);
+}
+
+.NavButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}

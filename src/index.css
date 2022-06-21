@@ -25,6 +25,25 @@ body {
     "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   font-weight: 500;
+  font-size: 18px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+h2,
+h3,
+summary {
+  font-weight: 600;
+}
+
+:root {
+  --accent-colour: #238377;
+  --text-colour: black;
+  --divider-colour: #c4c4c4;
+  --text-secondary-colour: #686868;
 }

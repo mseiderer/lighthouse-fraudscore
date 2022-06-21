@@ -1,0 +1,32 @@
+input.btn {
+  height: 50px;
+  padding: 0 20px;
+  color: white;
+  background-color: var(--accent-colour);
+  border: 2px solid var(--accent-colour);
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  font-size: 18px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: 0.2s linear;
+  transition-property: color, background-color;
+}
+
+input.btn.secondary {
+  color: var(--accent-colour);
+  background-color: white;
+}
+
+input.btn:hover {
+  color: var(--accent-colour);
+  background-color: white;
+}
+
+input.btn.secondary:hover {
+  color: white;
+  background-color: var(--accent-colour);
+}
