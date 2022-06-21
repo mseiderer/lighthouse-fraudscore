@@ -1,6 +1,7 @@
 import { Button } from "./Form";
 import { Questions } from "./Questions";
 import "./Calculator.css";
+import { useState } from "react";
 
 export const Calculator = () => {
   const form = Questions.map((item) => {
@@ -9,7 +10,7 @@ export const Calculator = () => {
     } else if (item.component === "section") {
       return <SectionHeader {...item} />;
     } else {
-      return <div></div>;
+      throw new Error("Unknown component in form");
     }
   });
 
@@ -24,10 +25,12 @@ export const Calculator = () => {
               yolo. If you don’t feel like clicking some buttons, start with a
               pre-filled example:
             </p>
+            {/* TODO */}
             <p>Example for high address fraud risk</p>
             <p>Example for high white fraud risk</p>
           </div>
         </div>
+        {/* TODO */}
         <Button>Start</Button>
       </div>
       <div className='calculator-form'>{form}</div>
@@ -36,11 +39,32 @@ export const Calculator = () => {
 };
 
 export const Question = (props) => {
-  const options = props.options.map((option) => <QuestionOption {...option} />);
-  const className = props.collapsed ? " collapsed" : "";
+  const [selectedOption, setSelectedOption] = useState();
+  // TODO lift up
+  const [collapsed, setCollapsed] = useState(true);
+
+  const options = props.options.map((option) => (
+    <QuestionOption
+      value={option.key}
+      // TODO lmao
+      checked={selectedOption == option.key}
+      handleOptionChange={(e) => setSelectedOption(e.target.value)}
+      {...option}
+    />
+  ));
+  const className = collapsed ? " collapsed" : "";
+  const toggleCollapse = (e) => {
+    e.preventDefault();
+    setCollapsed(!collapsed);
+  };
 
   return (
-    <div className={"Question" + className} id={props.id}>
+    <div
+      className={"Question" + className}
+      id={props.id}
+      onClick={toggleCollapse}
+      onKeyDown={toggleCollapse}
+    >
       <div className='question-header' tabIndex={0}>
         <h3>{props.title}</h3>
       </div>
@@ -50,6 +74,28 @@ export const Question = (props) => {
         <fieldset>{options}</fieldset>
         <NavButtons />
       </div>
+    </div>
+  );
+};
+
+export const QuestionOption = ({
+  label,
+  value,
+  checked,
+  handleOptionChange,
+}) => {
+  return (
+    <div className='QuestionOption'>
+      <label>
+        <input
+          type='radio'
+          value={value}
+          checked={checked}
+          onChange={handleOptionChange}
+        />
+        <div>{label}</div>
+      </label>
+      <ScoreImpactLabel scoreImpact={100} />
     </div>
   );
 };
@@ -73,18 +119,6 @@ export const Guidance = (props) => {
       <summary>Guidance</summary>
       <div className='guidance-details'>{props.children}</div>
     </details>
-  );
-};
-
-export const QuestionOption = (props) => {
-  return (
-    <div className='QuestionOption'>
-      <label>
-        <input type='radio' />
-        <div>{props.label}</div>
-      </label>
-      <ScoreImpactLabel scoreImpact={100} />
-    </div>
   );
 };
 
