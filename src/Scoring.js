@@ -28,7 +28,7 @@ export const score = (a) => {
   let r33; // risicowijk
 
   h7 = a.arbeidsuren === 1 ? 50 : 0;
-  h7 = a.arbeidsuren === 2 ? 1 : a.arbeidsuren === 4 ? 1 : 0;
+  i7 = a.arbeidsuren === 2 ? 1 : a.arbeidsuren === 4 ? 1 : 0;
   j7 = a.arbeidsuren === 3 ? 0 : 1;
 
   h9 = a.arbeidsongeschiktheid === 1 ? 0 : 80;
@@ -335,7 +335,7 @@ export const score = (a) => {
     t27 = 1;
   }
 
-  r29 = a.fraudeverleden === 1 ? 1 : 1.5;
+  r29 = a.fraudeverleden === 1 ? 1.5 : 1;
 
   if (a.risicowijk === 1) {
     r33 = 0.9;
@@ -392,7 +392,8 @@ export const score = (a) => {
   const thresholdSamenlevingsfraude = 983;
   const thresholdAdresfraude = 983;
 
-  const normalise = (score, threshold) => (1000 * score) / threshold;
+  const normalise = (score, threshold) =>
+    Math.round((1000 * score) / threshold);
 
   return {
     witteFraude: normalise(witteFraudeScore, thresholdWitteFraude),
