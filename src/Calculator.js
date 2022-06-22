@@ -6,8 +6,23 @@ import { score } from "./Scoring";
 
 export const Calculator = () => {
   const [formData, setFormData] = useState({});
+  const results = score(formData);
+  // Score used to calculate impact
+  const [selectedScore, setSelectedScore] = useState();
   const handleChange = (key, value) => {
     setFormData({ ...formData, [key]: parseInt(value) });
+  };
+  const calculateImpact = (id, options) => {
+    if (selectedScore) {
+      return options.map((option) => ({
+        ...option,
+        impact:
+          score({ ...formData, [id]: option.value })[selectedScore] -
+          results[selectedScore],
+      }));
+    } else {
+      return options;
+    }
   };
 
   const form = Questions.map((item, i) => {
@@ -17,9 +32,8 @@ export const Calculator = () => {
           guidance={item.guidance}
           id={item.id}
           key={i}
-          onOptionChange={handleChange}
-          options={item.options}
-          showScoreImpact={item.showScoreImpact}
+          onChange={handleChange}
+          options={calculateImpact(item.id, item.options)}
           text={item.text}
           title={item.title}
           value={formData[item.id]}
@@ -51,8 +65,25 @@ export const Calculator = () => {
         {/* TODO */}
         <Button>Start</Button>
       </div>
-      <div className='calculator-form'>{form}</div>
-      <ResultsTable formData={formData} />
+      <div className='calculator-form'>
+        <Question
+          id='score'
+          onChange={(_, value) => setSelectedScore(value)}
+          options={[
+            { label: "Witte fraude", value: "witteFraude" },
+            { label: "Grijze fraude", value: "grijzeFraude" },
+            { label: "Zwarte fraude", value: "zwarteFraude" },
+            { label: "Vermogensfraude", value: "vermogensfraude" },
+            { label: "Samenlevingsfraude", value: "samenlevingsfraude" },
+            { label: "Adresfraude", value: "adresfraude" },
+          ]}
+          text='Select a score to see how your answers affect it. You get results for all scores at the end.'
+          title='Scoring algorithm'
+          value={selectedScore}
+        />
+        {form}
+      </div>
+      <ResultsTable results={results} />
     </div>
   );
 };
@@ -60,8 +91,7 @@ export const Calculator = () => {
 export const Question = ({
   guidance,
   id,
-  onOptionChange,
-  showScoreImpact,
+  onChange,
   options,
   text,
   title,
@@ -76,7 +106,7 @@ export const Question = ({
     }
   };
 
-  const handleChange = (value) => onOptionChange(id, value);
+  const handleChange = (value) => onChange(id, value);
 
   return (
     <div className={"Question" + className} id={id}>
@@ -95,8 +125,10 @@ export const Question = ({
           {options.map((option, i) => (
             <QuestionOption
               value={option.value}
-              checked={parseInt(value) === option.value}
+              // Just gruesome lmao
+              checked={value + "" === option.value + ""}
               onChange={handleChange}
+              impact={option.impact}
               key={i}
               label={option.label}
             />
@@ -108,7 +140,11 @@ export const Question = ({
   );
 };
 
-export const QuestionOption = ({ label, value, checked, onChange }) => {
+export const QuestionOption = ({ label, value, checked, onChange, impact }) => {
+  const handleChange = (e) => {
+    onChange(e.target.value);
+  };
+
   return (
     <div className='QuestionOption'>
       <label>
@@ -116,11 +152,15 @@ export const QuestionOption = ({ label, value, checked, onChange }) => {
           type='radio'
           value={value}
           checked={checked}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={handleChange}
         />
         <div>{label}</div>
       </label>
-      <ScoreImpactLabel scoreImpact={100} />
+      {impact !== undefined && !checked ? (
+        <ScoreImpactLabel impact={impact} />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
@@ -147,12 +187,12 @@ export const Guidance = (props) => {
   );
 };
 
-export const ScoreImpactLabel = (props) => {
+export const ScoreImpactLabel = ({ impact }) => {
   let scoreImpact;
-  if (props.scoreImpact >= 0) {
-    scoreImpact = "+" + props.scoreImpact;
+  if (impact >= 0) {
+    scoreImpact = "+" + impact;
   } else {
-    scoreImpact = "–" + Math.abs(props.scoreImpact);
+    scoreImpact = "–" + Math.abs(impact);
   }
 
   return <div className='ScoreImpactLabel'>{scoreImpact}</div>;
@@ -171,9 +211,7 @@ export const SectionHeader = ({ title, text }) => {
   );
 };
 
-export const ResultsTable = ({ formData }) => {
-  const results = score(formData);
-
+export const ResultsTable = ({ results }) => {
   return (
     <div className='ResultsTable'>
       <SectionHeader
