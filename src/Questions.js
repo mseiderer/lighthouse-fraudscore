@@ -346,7 +346,7 @@ export const Questions = [
     showScoreImpact: true,
   },
   {
-    id: "woonwijk",
+    id: "risicowijk",
     component: "question",
     title: "Woonwijk",
     text: "Risicowijk:",
