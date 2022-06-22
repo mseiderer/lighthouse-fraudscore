@@ -38,7 +38,9 @@ export const Calculator = () => {
   const navigate = (id) => {
     setExpanded(id);
     setTimeout(() => {
-      document.location.href = "#" + id;
+      const target = document.getElementById(id);
+      target.scrollIntoView({ behavior: "smooth" });
+      // document.location.href = "#" + id;
     }, 200);
   };
 
