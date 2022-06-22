@@ -1,12 +1,14 @@
 export const Questions = [
   {
-    id: 0,
+    id: "kernvariabelen",
     component: "section",
     title: "Kernvariabelen",
     text: "TK these questions add a fixed amount to the final score or whatever.",
   },
   {
     id: "arbeidsuren",
+    prevId: "start",
+    nextId: "arbeidsongeschiktheid",
     component: "question",
     title: "Huidige arbeidsuren",
     text: "Het aantal uren dat ten tijde van de ingangsdatum wordt gewerkt:",
@@ -23,6 +25,8 @@ export const Questions = [
   },
   {
     id: "arbeidsongeschiktheid",
+    prevId: "arbeidsuren",
+    nextId: "beroep",
     component: "question",
     title: "Arbeidsongeschiktheid",
     text: "Arbeidsongeschiktheid ten tijde van de ingangsdatum:",
@@ -36,6 +40,8 @@ export const Questions = [
   },
   {
     id: "beroep",
+    prevId: "arbeidsongeschiktheid",
+    nextId: "zelfstandige",
     component: "question",
     title: "Beroep",
     text: "Het laatst uitgeoefende beroep of het beroep waarvoor men een opleiding heeft gevolgd; dus geen zgn. ‘wensberoepen’:",
@@ -61,6 +67,8 @@ export const Questions = [
   },
   {
     id: "zelfstandige",
+    prevId: "beroep",
+    nextId: "woonsituatie",
     component: "question",
     title: "Gewezen zelfstandige",
     text: "Bij het kenmerk Gewezen zelfstandige dient ‘Ja’ of ‘Nee’ te worden ingevuld:",
@@ -74,6 +82,8 @@ export const Questions = [
   },
   {
     id: "woonsituatie",
+    prevId: "zelfstandige",
+    nextId: "familie",
     component: "question",
     title: "Woonsituatie",
     text: "Woonsituatie ten tijde van de ingangsdatum:",
@@ -100,6 +110,8 @@ export const Questions = [
   },
   {
     id: "familie",
+    prevId: "woonsituatie",
+    nextId: "medebewoners",
     component: "question",
     title: "Bij familie",
     text: "Bij ouders, kinderen, broers en zussen, ooms en tantes, neven en nichten, grootouders en kleinkinderen:",
@@ -113,6 +125,8 @@ export const Questions = [
   },
   {
     id: "medebewoners",
+    prevId: "familie",
+    nextId: "kamerbewoning",
     component: "question",
     title: "Meer dan 4 medebewoners",
     text: "TK",
@@ -126,6 +140,8 @@ export const Questions = [
   },
   {
     id: "kamerbewoning",
+    prevId: "medebewoners",
+    nextId: "medebewoner",
     component: "question",
     title: "Aanvraag bij eerste maal kamerbewoning",
     text: "TK",
@@ -139,6 +155,8 @@ export const Questions = [
   },
   {
     id: "medebewoner",
+    prevId: "kamerbewoning",
+    nextId: "uitgesloten",
     component: "question",
     title: "Heeft medebewoner of onderhuurder",
     text: "TK",
@@ -152,6 +170,8 @@ export const Questions = [
   },
   {
     id: "uitgesloten",
+    prevId: "medebewoner",
+    nextId: "verlaten",
     component: "question",
     title: "Partner uitgesloten",
     text: "Getrouwd of samenwonend, maar de partner heeft geen geldig vreemdelingendocument, partner zit in detentie, etc.:",
@@ -165,6 +185,8 @@ export const Questions = [
   },
   {
     id: "verlaten",
+    prevId: "uitgesloten",
+    nextId: "reden",
     component: "question",
     title: "Gehuwd en verlaten",
     text: "Klant is getrouwd maar geeft aan dat de partner de klant heeft verlaten:",
@@ -178,6 +200,8 @@ export const Questions = [
   },
   {
     id: "reden",
+    prevId: "verlaten",
+    nextId: "verblijf_familie",
     component: "question",
     title: "Reden aanvraag",
     text: "De directe aanleiding om een Wwb uitkering aan te vragen:",
@@ -195,6 +219,8 @@ export const Questions = [
   },
   {
     id: "verblijf_familie",
+    prevId: "reden",
+    nextId: "verblijf_partner",
     component: "question",
     title: "Verblijf belanghebbende bij (schoon-)familie",
     text: "TK",
@@ -208,6 +234,8 @@ export const Questions = [
   },
   {
     id: "verblijf_partner",
+    prevId: "verblijf_familie",
+    nextId: "kinderen",
     component: "question",
     title: "Verblijf ex-partner bij (schoon-)familie",
     text: "TK",
@@ -221,6 +249,8 @@ export const Questions = [
   },
   {
     id: "kinderen",
+    prevId: "verblijf_partner",
+    nextId: "woonlasten",
     component: "question",
     title: "Erkende kinderen",
     text: "TK",
@@ -233,13 +263,15 @@ export const Questions = [
     showScoreImpact: true,
   },
   {
-    id: 16,
+    id: "versterkende_variabelen",
     component: "section",
     title: "Versterkende variabelen",
     text: "These questions do some multiplication magic to the score.",
   },
   {
     id: "woonlasten",
+    prevId: "kinderen",
+    nextId: "inkomen",
     component: "question",
     title: "Woonlasten",
     text: "Kale huur minus de huursubsidie:",
@@ -254,6 +286,8 @@ export const Questions = [
   },
   {
     id: "inkomen",
+    prevId: "woonlasten",
+    nextId: "schuldpositie",
     component: "question",
     title: "Inkomen voor aanvraag WWB/Ioaw",
     text: "Inkomen vlak voor de ingangsdatum van de Wwb/Ioaw uitkering:",
@@ -267,6 +301,8 @@ export const Questions = [
   },
   {
     id: "schuldpositie",
+    prevId: "inkomen",
+    nextId: "leefvorm",
     component: "question",
     title: "Schuldpositie",
     text: "Het negatieve vermogen van de klant ten tijde van de aanvraagdatum:",
@@ -282,6 +318,8 @@ export const Questions = [
   },
   {
     id: "leefvorm",
+    prevId: "schuldpositie",
+    nextId: "opleiding",
     component: "question",
     title: "Leefvorm",
     text: "Gezinssituatie dan wel huwelijkse staat:",
@@ -296,6 +334,8 @@ export const Questions = [
   },
   {
     id: "opleiding",
+    prevId: "leefvorm",
+    nextId: "leeftijd",
     component: "question",
     title: "Opleiding",
     text: "De hoogst genoten opleiding, waarbij niet van belang is of er een diploma is behaald:",
@@ -310,6 +350,8 @@ export const Questions = [
   },
   {
     id: "leeftijd",
+    prevId: "opleiding",
+    nextId: "geslacht",
     component: "question",
     title: "Leeftijd",
     text: "Leeftijd van de klant ten tijde van de ingangsdatum van de Wwb uitkering:",
@@ -325,6 +367,8 @@ export const Questions = [
   },
   {
     id: "geslacht",
+    prevId: "leeftijd",
+    nextId: "fraudeverleden",
     component: "question",
     title: "Geslacht",
     text: "Geslacht:",
@@ -336,6 +380,8 @@ export const Questions = [
   },
   {
     id: "fraudeverleden",
+    prevId: "geslacht",
+    nextId: "risicowijk",
     component: "question",
     title: "Fraudeverleden",
     text: "Eerder fraude gepleegd:",
@@ -347,6 +393,8 @@ export const Questions = [
   },
   {
     id: "risicowijk",
+    prevId: "fraudeverleden",
+    nextId: "results",
     component: "question",
     title: "Woonwijk",
     text: "Risicowijk:",
@@ -356,5 +404,11 @@ export const Questions = [
       { label: "Wijk met hoog risico", value: 3 },
     ],
     showScoreImpact: true,
+  },
+  {
+    id: "results",
+    component: "section",
+    title: "Results",
+    text: "Lorem ipsum here are the results. Everything over 1000 is high and triggers some protocol yolo.",
   },
 ];

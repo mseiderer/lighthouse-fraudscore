@@ -116,6 +116,7 @@
   place-content: center;
   flex-shrink: 0;
   flex-grow: 0;
+  cursor: pointer;
 }
 
 .QuestionOption input[type="radio"]::before {
@@ -135,6 +136,12 @@
   display: flex;
   align-items: center;
   margin-right: 10px;
+  cursor: pointer;
+}
+
+.QuestionOption label:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .ScoreImpactLabel {

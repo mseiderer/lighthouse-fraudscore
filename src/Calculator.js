@@ -5,13 +5,15 @@ import { useState } from "react";
 import { score } from "./Scoring";
 
 export const Calculator = () => {
+  const [expanded, setExpanded] = useState();
   const [formData, setFormData] = useState({});
-  const results = score(formData);
   // Score used to calculate impact
   const [selectedScore, setSelectedScore] = useState();
+  const results = score(formData);
   const handleChange = (key, value) => {
     setFormData({ ...formData, [key]: parseInt(value) });
   };
+
   const calculateImpact = (id, options) => {
     if (selectedScore) {
       return options.map((option) => ({
@@ -23,6 +25,21 @@ export const Calculator = () => {
     } else {
       return options;
     }
+  };
+
+  const toggleCollapse = (id) => {
+    if (expanded === id) {
+      setExpanded();
+    } else {
+      setExpanded(id);
+    }
+  };
+
+  const navigate = (id) => {
+    setExpanded(id);
+    setTimeout(() => {
+      document.location.href = "#" + id;
+    }, 200);
   };
 
   const form = Questions.map((item, i) => {
@@ -37,6 +54,11 @@ export const Calculator = () => {
           text={item.text}
           title={item.title}
           value={formData[item.id]}
+          toggleCollapse={toggleCollapse}
+          expanded={expanded === item.id}
+          next={item.nextId}
+          prev={item.prevId}
+          navigate={navigate}
         />
       );
     } else if (item.component === "section") {
@@ -96,13 +118,17 @@ export const Question = ({
   text,
   title,
   value,
+  expanded,
+  toggleCollapse,
+  prev,
+  next,
+  navigate,
 }) => {
-  const [collapsed, setCollapsed] = useState(true);
-  const className = collapsed ? " collapsed" : "";
-  const toggleCollapse = (e) => {
+  const className = !expanded ? " collapsed" : "";
+  const handleKeyDown = (e) => {
     if (!e.isComposing && (e.keyCode === 32 || e.keyCode === 13)) {
       e.preventDefault();
-      setCollapsed(!collapsed);
+      toggleCollapse(id);
     }
   };
 
@@ -113,8 +139,8 @@ export const Question = ({
       <div
         className='question-header'
         tabIndex={0}
-        onClick={() => setCollapsed(!collapsed)}
-        onKeyDown={toggleCollapse}
+        onClick={() => toggleCollapse(id)}
+        onKeyDown={handleKeyDown}
       >
         <h3>{title}</h3>
       </div>
@@ -134,7 +160,7 @@ export const Question = ({
             />
           ))}
         </fieldset>
-        <NavButtons />
+        <NavButtons prev={prev} next={next} navigate={navigate} />
       </div>
     </div>
   );
@@ -165,13 +191,13 @@ export const QuestionOption = ({ label, value, checked, onChange, impact }) => {
   );
 };
 
-export const NavButtons = (props) => {
+export const NavButtons = ({ prev, next, navigate }) => {
   return (
     <div className='NavButtons'>
-      <Button no-outline narrow>
+      <Button no-outline narrow onClick={() => navigate(prev)}>
         Back
       </Button>
-      <Button primary narrow>
+      <Button primary narrow onClick={() => navigate(next)}>
         Next
       </Button>
     </div>
@@ -214,10 +240,6 @@ export const SectionHeader = ({ title, text }) => {
 export const ResultsTable = ({ results }) => {
   return (
     <div className='ResultsTable'>
-      <SectionHeader
-        title='Results'
-        text='Lorem ipsum here are the results. Everything over 1000 is high and triggers some protocol yolo.'
-      />
       <Result
         title='Witte fraude'
         description='Lorem ipsum white fraud is fraud that can be uncovered by exchanging data with the tax office.'
