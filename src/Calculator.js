@@ -218,6 +218,11 @@ export const ResultsTable = ({ results }) => {
         title='Results'
         text='Lorem ipsum here are the results. Everything over 1000 is high and triggers some protocol yolo.'
       />
+      <Result
+        title='Witte fraude'
+        description='Lorem ipsum white fraud is fraud that can be uncovered by exchanging data with the tax office.'
+        score={results.witteFraude}
+      />
       <p>Witte fraude: {results.witteFraude}</p>
       <p>Grijze fraude: {results.grijzeFraude}</p>
       <p>Zwarte fraude: {results.zwarteFraude}</p>
@@ -229,13 +234,16 @@ export const ResultsTable = ({ results }) => {
 };
 
 export const Result = ({ title, description, score }) => {
-  <div className='Result'>
-    <div>
-      <div className='result-key'>{title}</div>
-      <div className='result-value'>{score}</div>
+  const className = score > 1000 ? " high" : "";
+  return (
+    <div className='Result'>
+      <div>
+        <div className='result-key'>{title}</div>
+        <div className={"result-value" + className}>{score}</div>
+      </div>
+      <div>
+        <p>{description}</p>
+      </div>
     </div>
-    <div>
-      <p>{description}</p>
-    </div>
-  </div>;
+  );
 };

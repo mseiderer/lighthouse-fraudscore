@@ -223,6 +223,8 @@ export const score = (a) => {
     } else {
       s7 = 1;
     }
+  } else if (a.woonlasten === undefined) {
+    s7 = 1; // get more sensible scores when nothing is filled in
   } else {
     s7 = 0;
   }
@@ -263,6 +265,8 @@ export const score = (a) => {
     } else {
       r12 = 1;
     }
+  } else if (a.inkomen === undefined) {
+    r12 = 1; // get more sensible scores when nothing is filled in
   } else {
     r12 = 0;
   }
@@ -309,8 +313,10 @@ export const score = (a) => {
     r25 = 1.75;
   } else if (a.leeftijd === 5) {
     r25 = 1;
-  } else {
+  } else if (a.leeftijd === 6) {
     r25 = 0;
+  } else {
+    r25 = 1; // get more sensible scores when nothing is filled in
   }
 
   s25 = a.leeftijd < 5 ? 1 : 1.5;
