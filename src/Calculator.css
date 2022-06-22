@@ -45,6 +45,7 @@
 
 .Question .question-header > h3::before {
   content: "▼";
+  transform: scale(0.8);
   margin-left: -1px;
   margin-right: 10px;
   color: var(--text-colour);
@@ -53,7 +54,7 @@
 }
 
 .Question.collapsed .question-header > h3::before {
-  transform: rotate(-90deg);
+  transform: rotate(-90deg) scale(0.8);
 }
 
 .Question.collapsed .question-body {
