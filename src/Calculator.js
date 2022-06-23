@@ -3,13 +3,21 @@ import { Questions } from "./Questions";
 import "./Calculator.css";
 import { useState } from "react";
 import { score } from "./Scoring";
+import { Scores } from "./Scores";
 
 export const Calculator = () => {
   const [expanded, setExpanded] = useState();
   const [formData, setFormData] = useState({});
   // Score used to calculate impact
   // eslint-disable-next-line no-unused-vars
-  const [selectedScore] = useState();
+  const [selectedScore, setSelectedScore] = useState();
+  const handleSelectionChange = (id) => {
+    if (id === selectedScore) {
+      setSelectedScore();
+    } else {
+      setSelectedScore(id);
+    }
+  };
   const results = score(formData);
   const handleChange = (key, value) => {
     setFormData({ ...formData, [key]: parseInt(value) });
@@ -115,7 +123,11 @@ export const Calculator = () => {
         /> */}
         {form}
       </div>
-      <ResultsTable results={results} />
+      <ResultsTable
+        results={results}
+        selected={selectedScore}
+        onSelectionChange={handleSelectionChange}
+      />
     </div>
   );
 };
@@ -248,50 +260,44 @@ export const SectionHeader = ({ title, text, id }) => {
   );
 };
 
-export const ResultsTable = ({ results }) => {
+export const ResultsTable = ({ results, onSelectionChange, selected }) => {
   return (
     <div className='ResultsTable'>
-      <Result
-        title='Witte fraude'
-        description='Lorem ipsum white fraud is fraud that can be uncovered by exchanging data with the tax office.'
-        score={results.witteFraude}
-      />
-      <Result
-        title='Grijze fraude'
-        description='Lorem ipsum white fraud is fraud that can be uncovered by exchanging data with the tax office.'
-        score={results.grijzeFraude}
-      />
-      <Result
-        title='Zwarte fraude'
-        description='Lorem ipsum white fraud is fraud that can be uncovered by exchanging data with the tax office.'
-        score={results.zwarteFraude}
-      />
-      <Result
-        title='Vermogensfraude'
-        description='Lorem ipsum white fraud is fraud that can be uncovered by exchanging data with the tax office.'
-        score={results.vermogensfraude}
-      />
-      <Result
-        title='Samenlevingsfraude'
-        description='Lorem ipsum white fraud is fraud that can be uncovered by exchanging data with the tax office.'
-        score={results.samenlevingsfraude}
-      />
-      <Result
-        title='Adresfraude'
-        description='Lorem ipsum white fraud is fraud that can be uncovered by exchanging data with the tax office.'
-        score={results.adresfraude}
-      />
+      {Scores.map((score) => (
+        <Result
+          title={score.title}
+          id={score.id}
+          key={score.id}
+          description={score.description}
+          score={results[score.id]}
+          selected={score.id === selected}
+          onSelect={() => onSelectionChange(score.id)}
+        ></Result>
+      ))}
     </div>
   );
 };
 
-export const Result = ({ title, description, score }) => {
+export const Result = ({ title, description, score, onSelect, selected }) => {
   const className = score > 1000 ? " high" : "";
   const [expanded, setExpanded] = useState(false);
+
   const toggleCollapse = () => setExpanded(!expanded);
+  const handleKeyDown = (e) => {
+    if (!e.isComposing && (e.keyCode === 32 || e.keyCode === 13)) {
+      e.preventDefault();
+      toggleCollapse();
+    }
+  };
+
   return (
     <div className={"Result" + (expanded ? "" : " collapsed")}>
-      <div className='result-header' onClick={toggleCollapse}>
+      <div
+        className='result-header'
+        tabIndex={0}
+        onClick={toggleCollapse}
+        onKeyDown={handleKeyDown}
+      >
         <div className='marker'></div>
         <h3>{title}</h3>
         <div className={"result-value" + className}>{score}</div>
@@ -299,7 +305,15 @@ export const Result = ({ title, description, score }) => {
       <div className='result-body'>
         <div className='result-text-container'>{description}</div>
         <div className='select-container'>
-          <Button narrow>Select</Button>
+          {selected ? (
+            <Button narrow secondary onClick={onSelect}>
+              Deselect
+            </Button>
+          ) : (
+            <Button narrow onClick={onSelect}>
+              Select
+            </Button>
+          )}
           <div className='info-label'>
             Select this scoring algorithm and see how your answers influence the
             score.
