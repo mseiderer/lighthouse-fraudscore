@@ -1,5 +1,6 @@
 {
   "name": "lighthouse-fraudscore",
+  "homepage": "https://fraudscore-staging.seiderer.me",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,9 +11,12 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "gh-pages": "^4.0.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "echo 'fraudscore-staging.seiderer.me' > ./build/CNAME && gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
