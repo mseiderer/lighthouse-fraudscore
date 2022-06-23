@@ -1,6 +1,7 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { Button } from "./Form";
 import "./App.css";
+import logo from "./logo-brand.svg";
 
 export const App = () => {
   return (
@@ -29,6 +30,31 @@ export const App = () => {
         {/* <Link to='#'>NL</Link> */}
       </div>
       <Outlet />
+      <div className='footer'>
+        <img src={logo} alt='Lighthouse Reports logo' />
+        <div>
+          <p>
+            Een project van{" "}
+            <a
+              href='https://lighthousereports.nl'
+              target='_blank'
+              rel='noreferrer'
+            >
+              Lighthouse Reports
+            </a>
+            ,{" "}
+            <a href='https://vpro.nl' target='_blank' rel='noreferrer'>
+              VPRO
+            </a>{" "}
+            en{" "}
+            <a href='https://nrc.nl' target='_blank' rel='noreferrer'>
+              NRC
+            </a>
+            .
+          </p>
+          <p>© Lighthouse Reports 2022</p>
+        </div>
+      </div>
     </div>
   );
 };
@@ -63,9 +89,6 @@ export const Home = () => {
         <a href='https://vpro.nl' target='_blank' rel='noreferrer'>
           <Button secondary>Lees meer bij de VPRO</Button>
         </a>
-      </div>
-      <div className='credits'>
-        <p>Een project van Lighthouse Reports, VPRO en NRC.</p>
       </div>
     </div>
   );

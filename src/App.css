@@ -26,12 +26,14 @@ nav a {
   margin-right: 18px;
 }
 
-.navbar a {
+.navbar a,
+.footer a {
   text-decoration: none;
   color: var(--text-colour);
 }
 
-.navbar a:hover {
+.navbar a:hover,
+.footer a:hover {
   color: var(--accent-colour);
   text-decoration: underline 1px;
   text-underline-offset: 2px;
@@ -44,6 +46,35 @@ nav a {
 .navbar a.active:hover {
   cursor: default;
   text-decoration: none;
+}
+
+.footer {
+  margin: 20px;
+  padding: 20px 2px 0 2px;
+  /* border-top: 1px solid var(--divider-colour); */
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.footer p {
+  font-weight: 500;
+  font-size: 14px;
+  margin: 0;
+}
+
+.footer div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer img {
+  height: 36px;
+}
+
+.footer a {
+  font-weight: 600;
 }
 
 .Home {
