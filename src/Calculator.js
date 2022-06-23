@@ -8,7 +8,8 @@ export const Calculator = () => {
   const [expanded, setExpanded] = useState();
   const [formData, setFormData] = useState({});
   // Score used to calculate impact
-  const [selectedScore, setSelectedScore] = useState();
+  // eslint-disable-next-line no-unused-vars
+  const [selectedScore] = useState();
   const results = score(formData);
   const handleChange = (key, value) => {
     setFormData({ ...formData, [key]: parseInt(value) });

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export const score = (a) => {
   // Kernvariabelen
   let h7, i7, j7; // arbeidsuren
