@@ -2,7 +2,7 @@ import { Button } from "./Form";
 import { Questions } from "./Questions";
 import "./Calculator.css";
 import { useState } from "react";
-import { score } from "./Scoring";
+import { score, zeroScores } from "./Scoring";
 import { Scores } from "./Scores";
 
 export const Calculator = () => {
@@ -17,7 +17,9 @@ export const Calculator = () => {
       setSelectedScore(id);
     }
   };
-  const results = score(formData);
+  const dirty = Object.keys(formData).length !== 0;
+  // dirty trick to show 0 instead of fall-through defaults
+  const results = dirty ? score(formData) : zeroScores;
   const handleChange = (key, value) => {
     setFormData({ ...formData, [key]: parseInt(value) });
   };
@@ -50,6 +52,12 @@ export const Calculator = () => {
       target.scrollIntoView({ behavior: "smooth" });
       // document.location.href = "#" + id;
     }, 200);
+  };
+
+  const resetForm = () => {
+    setFormData({});
+    setExpanded();
+    setSelectedScore();
   };
 
   const form = Questions.map((item, i) => {
@@ -109,7 +117,13 @@ export const Calculator = () => {
           </div>
         </div>
         <div className='calculator-start-button'>
-          <Button onClick={() => navigate("arbeidsuren")}>Start</Button>
+          {dirty ? (
+            <Button secondary onClick={resetForm}>
+              Formulier leegmaken
+            </Button>
+          ) : (
+            <Button onClick={() => navigate("arbeidsuren")}>Start</Button>
+          )}
         </div>
       </div>
       <div className='calculator-form'>{form}</div>

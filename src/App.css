@@ -86,3 +86,9 @@ nav a {
 .cta-buttons .btn {
   width: 100%;
 }
+
+@media screen and (max-width: 500px) {
+  .cta-buttons a {
+    width: 100%;
+  }
+}

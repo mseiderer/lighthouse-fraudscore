@@ -13,7 +13,7 @@
 }
 
 .calculator-start-button input.btn {
-  min-width: 140px;
+  width: 50%;
 }
 
 .SectionHeader {
@@ -266,6 +266,17 @@
   }
 
   .Result .select-container input.btn {
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .Calculator .calculator-start-button {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .Calculator .calculator-start-button input.btn {
     width: 100%;
     flex: 0 0 auto;
   }

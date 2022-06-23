@@ -414,3 +414,12 @@ export const score = (a) => {
     adresfraude: normalise(adresfraudeScore, thresholdAdresfraude),
   };
 };
+
+export const zeroScores = {
+  witteFraude: 0,
+  grijzeFraude: 0,
+  zwarteFraude: 0,
+  vermogensfraude: 0,
+  samenlevingsfraude: 0,
+  adresfraude: 0,
+};
