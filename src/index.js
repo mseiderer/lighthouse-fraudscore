@@ -10,6 +10,7 @@ root.render(
   <React.StrictMode>
     <HashRouter>
       <Routes>
+        <Route path='/embedded' element={<Calculator />} />
         <Route path='/' element={<App />}>
           <Route path='/' element={<Home />} />
           <Route path='calculator' element={<Calculator />} />
