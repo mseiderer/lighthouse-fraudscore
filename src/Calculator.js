@@ -9,7 +9,6 @@ export const Calculator = () => {
   const [expanded, setExpanded] = useState();
   const [formData, setFormData] = useState({});
   // Score used to calculate impact
-  // eslint-disable-next-line no-unused-vars
   const [selectedScore, setSelectedScore] = useState();
   const handleSelectionChange = (id) => {
     if (id === selectedScore) {
@@ -209,10 +208,10 @@ export const NavButtons = ({ prev, next, navigate }) => {
   return (
     <div className='NavButtons'>
       <Button no_outline narrow onClick={() => navigate(prev)}>
-        Back
+        Vorige
       </Button>
       <Button primary narrow onClick={() => navigate(next)}>
-        Next
+        Volgende
       </Button>
     </div>
   );
@@ -221,7 +220,7 @@ export const NavButtons = ({ prev, next, navigate }) => {
 export const Guidance = (props) => {
   return (
     <details className='Guidance'>
-      <summary>Guidance</summary>
+      <summary>Instructies</summary>
       <div className='guidance-details'>{props.children}</div>
     </details>
   );
@@ -280,6 +279,10 @@ export const Result = ({ title, description, score, onSelect, selected }) => {
       toggleCollapse();
     }
   };
+  const scrollToTop = () => {
+    const target = document.getElementById("kernvariabelen");
+    target.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className={"Result" + (expanded ? "" : " collapsed")}>
@@ -296,19 +299,19 @@ export const Result = ({ title, description, score, onSelect, selected }) => {
       <div className='result-body'>
         <div className='result-text-container'>{description}</div>
         <div className='select-container'>
-          {selected ? (
-            <Button narrow secondary onClick={onSelect}>
-              Deselect
-            </Button>
-          ) : (
-            <Button narrow onClick={onSelect}>
-              Select
-            </Button>
-          )}
           <div className='info-label'>
             Klik hier om te kijken hoe jouw antwoorden de score voor deze vorm
             van fraude hebben beïnvloed
           </div>
+          {selected ? (
+            <Button narrow secondary onClick={scrollToTop}>
+              Terug naar begin
+            </Button>
+          ) : (
+            <Button narrow onClick={onSelect}>
+              Selecteren
+            </Button>
+          )}
         </div>
       </div>
     </div>

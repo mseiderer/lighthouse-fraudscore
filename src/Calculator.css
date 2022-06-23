@@ -162,6 +162,7 @@
 
 .ScoreImpactLabel {
   font-size: 14px;
+  font-weight: 500;
   text-align: right;
   min-width: 60px;
   max-width: 60px;
@@ -246,9 +247,26 @@
   align-items: center;
   border: 1px solid var(--divider-colour);
   padding: 10px;
+  gap: 20px;
 }
 
 .Result .info-label {
-  margin-left: 20px;
   font-size: 16px;
+}
+
+.Result .select-container input.btn {
+  flex: 0 0 190px;
+}
+
+@media screen and (max-width: 500px) {
+  .Result .select-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .Result .select-container input.btn {
+    width: 100%;
+    flex: 0 0 auto;
+  }
 }

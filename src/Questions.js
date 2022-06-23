@@ -408,7 +408,7 @@ export const Questions = [
   {
     id: "results",
     component: "section",
-    title: "Results",
+    title: "Scores",
     text: [
       <p>
         Hieronder vind je de scores die gebaseerd zijn op de antwoorden die je

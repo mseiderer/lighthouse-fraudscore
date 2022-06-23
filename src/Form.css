@@ -10,6 +10,7 @@ input.btn {
   appearance: none;
   box-sizing: border-box;
   font-size: 18px;
+  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   transition: 0.2s linear;
