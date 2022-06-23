@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Getting ready 2 deploy
+
+- Update links to VPRO and NRC in [App.js](./src/App.js)
+- Allow crawling in [robots.txt](./public/robots.txt)
+- Set a CNAME record that points to GitHub Pages.
+- Update the canonical link in [index.html](./public/index.html)
+- Update `homepage` and the `deploy` script in [package.json](./package.json)
+- Deploy to GitHub Pages with `npm deploy`
+
 ## Available Scripts
 
 In the project directory, you can run:
