@@ -64,7 +64,14 @@ export const Calculator = () => {
         />
       );
     } else if (item.component === "section") {
-      return <SectionHeader key={i} title={item.title} text={item.text} />;
+      return (
+        <SectionHeader
+          key={i}
+          id={item.id}
+          title={item.title}
+          text={item.text}
+        />
+      );
     } else {
       throw new Error("Unknown component in form");
     }
@@ -87,10 +94,10 @@ export const Calculator = () => {
           </div>
         </div>
         {/* TODO */}
-        <Button>Start</Button>
+        <Button onClick={() => navigate("arbeidsuren")}>Start</Button>
       </div>
       <div className='calculator-form'>
-        <Question
+        {/* <Question
           id='score'
           onChange={(_, value) => setSelectedScore(value)}
           options={[
@@ -104,7 +111,7 @@ export const Calculator = () => {
           text='Select a score to see how your answers affect it. You get results for all scores at the end.'
           title='Scoring algorithm'
           value={selectedScore}
-        />
+        /> */}
         {form}
       </div>
       <ResultsTable results={results} />
@@ -144,6 +151,7 @@ export const Question = ({
         onClick={() => toggleCollapse(id)}
         onKeyDown={handleKeyDown}
       >
+        <div className='marker'></div>
         <h3>{title}</h3>
       </div>
       <div className='question-body'>
@@ -196,7 +204,7 @@ export const QuestionOption = ({ label, value, checked, onChange, impact }) => {
 export const NavButtons = ({ prev, next, navigate }) => {
   return (
     <div className='NavButtons'>
-      <Button no-outline narrow onClick={() => navigate(prev)}>
+      <Button no_outline narrow onClick={() => navigate(prev)}>
         Back
       </Button>
       <Button primary narrow onClick={() => navigate(next)}>
@@ -226,9 +234,9 @@ export const ScoreImpactLabel = ({ impact }) => {
   return <div className='ScoreImpactLabel'>{scoreImpact}</div>;
 };
 
-export const SectionHeader = ({ title, text }) => {
+export const SectionHeader = ({ title, text, id }) => {
   return (
-    <div className='SectionHeader'>
+    <div className='SectionHeader' id={id}>
       <h2>{title}</h2>
       {text && (
         <div className='sectionheader-text-container'>
@@ -247,26 +255,55 @@ export const ResultsTable = ({ results }) => {
         description='Lorem ipsum white fraud is fraud that can be uncovered by exchanging data with the tax office.'
         score={results.witteFraude}
       />
-      <p>Witte fraude: {results.witteFraude}</p>
-      <p>Grijze fraude: {results.grijzeFraude}</p>
-      <p>Zwarte fraude: {results.zwarteFraude}</p>
-      <p>Vermogensfraude: {results.vermogensfraude}</p>
-      <p>Samenlevingsfraude: {results.samenlevingsfraude}</p>
-      <p>Adresfraude: {results.adresfraude}</p>
+      <Result
+        title='Grijze fraude'
+        description='Lorem ipsum white fraud is fraud that can be uncovered by exchanging data with the tax office.'
+        score={results.grijzeFraude}
+      />
+      <Result
+        title='Zwarte fraude'
+        description='Lorem ipsum white fraud is fraud that can be uncovered by exchanging data with the tax office.'
+        score={results.zwarteFraude}
+      />
+      <Result
+        title='Vermogensfraude'
+        description='Lorem ipsum white fraud is fraud that can be uncovered by exchanging data with the tax office.'
+        score={results.vermogensfraude}
+      />
+      <Result
+        title='Samenlevingsfraude'
+        description='Lorem ipsum white fraud is fraud that can be uncovered by exchanging data with the tax office.'
+        score={results.samenlevingsfraude}
+      />
+      <Result
+        title='Adresfraude'
+        description='Lorem ipsum white fraud is fraud that can be uncovered by exchanging data with the tax office.'
+        score={results.adresfraude}
+      />
     </div>
   );
 };
 
 export const Result = ({ title, description, score }) => {
   const className = score > 1000 ? " high" : "";
+  const [expanded, setExpanded] = useState(false);
+  const toggleCollapse = () => setExpanded(!expanded);
   return (
-    <div className='Result'>
-      <div>
-        <div className='result-key'>{title}</div>
+    <div className={"Result" + (expanded ? "" : " collapsed")}>
+      <div className='result-header' onClick={toggleCollapse}>
+        <div className='marker'></div>
+        <h3>{title}</h3>
         <div className={"result-value" + className}>{score}</div>
       </div>
-      <div>
-        <p>{description}</p>
+      <div className='result-body'>
+        <div className='result-text-container'>{description}</div>
+        <div className='select-container'>
+          <Button narrow>Select</Button>
+          <div className='info-label'>
+            Select this scoring algorithm and see how your answers influence the
+            score.
+          </div>
+        </div>
       </div>
     </div>
   );

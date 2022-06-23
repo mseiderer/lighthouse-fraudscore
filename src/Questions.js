@@ -7,7 +7,7 @@ export const Questions = [
   },
   {
     id: "arbeidsuren",
-    prevId: "start",
+    prevId: "kernvariabelen",
     nextId: "arbeidsongeschiktheid",
     component: "question",
     title: "Huidige arbeidsuren",

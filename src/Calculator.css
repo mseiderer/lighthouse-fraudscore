@@ -43,7 +43,7 @@
   border: none;
 }
 
-.Question .question-header > h3::before {
+.Question .marker::before {
   content: "▼";
   transform: scale(0.8);
   margin-left: -1px;
@@ -53,7 +53,7 @@
   transition: transform 0.2s linear;
 }
 
-.Question.collapsed .question-header > h3::before {
+.Question.collapsed .marker::before {
   transform: rotate(-90deg) scale(0.8);
 }
 
@@ -62,6 +62,10 @@
 }
 
 .Question .question-header {
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
   cursor: pointer;
 }
 
@@ -147,8 +151,8 @@
 .ScoreImpactLabel {
   font-size: 14px;
   text-align: right;
-  min-width: 50px;
-  max-width: 50px;
+  min-width: 60px;
+  max-width: 60px;
   color: var(--text-secondary-colour);
 }
 
@@ -158,4 +162,81 @@
   gap: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
+}
+
+.Result {
+  border-top: 1px solid var(--divider-colour);
+  border-bottom: 1px solid var(--divider-colour);
+  box-sizing: border-box;
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+
+.Result h3 {
+  font-size: 20px;
+}
+
+.Result .marker::before {
+  content: "▼";
+  transform: scale(0.8);
+  margin-left: -1px;
+  margin-right: 10px;
+  color: var(--text-colour);
+  display: inline-block;
+  transition: transform 0.2s linear;
+}
+
+.Result.collapsed .marker::before {
+  transform: rotate(-90deg) scale(0.8);
+}
+
+.Result.collapsed .result-body {
+  display: none;
+}
+
+.Result .result-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-secondary-colour);
+}
+
+.Result .result-value.high {
+  color: var(--error-colour);
+}
+
+.Result .result-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.Result .result-header h3 {
+  flex: 1;
+}
+
+.Result .result-header h3:hover {
+  text-decoration: underline 1px;
+  text-underline-offset: 2px;
+}
+
+.Result .result-text-container {
+  border-left: 2px solid var(--divider-colour);
+  padding-left: 10px;
+  margin-bottom: 20px;
+  color: var(--text-secondary-colour);
+}
+
+.Result .select-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--divider-colour);
+  padding: 10px;
+}
+
+.Result .info-label {
+  margin-left: 20px;
+  font-size: 16px;
 }

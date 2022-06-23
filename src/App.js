@@ -47,8 +47,8 @@ export const Home = () => {
       </div>
       <div className='cta-buttons'>
         <Button>Calculate your score</Button>
-        <Button>Read more at NRC</Button>
-        <Button>Read more at VPRO</Button>
+        <Button secondary>Read more at NRC</Button>
+        <Button secondary>Read more at VPRO</Button>
       </div>
       <div className='credits'>
         <p>

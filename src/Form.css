@@ -30,3 +30,18 @@ input.btn.secondary:hover {
   color: white;
   background-color: var(--accent-colour);
 }
+
+input.btn.no_outline {
+  border: none;
+  background-color: white;
+  color: var(--accent-colour);
+}
+
+input.btn.no_outline:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+input.btn.narrow {
+  height: 40px;
+}
