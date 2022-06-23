@@ -9,7 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Set a CNAME record that points to GitHub Pages.
 - Update the canonical link in [index.html](./public/index.html)
 - Update `homepage` and the `deploy` script in [package.json](./package.json)
-- Deploy to GitHub Pages with `npm deploy`
+- Deploy to GitHub Pages with `npm run deploy`
 
 ## Available Scripts
 
