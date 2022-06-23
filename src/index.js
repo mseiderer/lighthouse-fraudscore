@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import { About, App, Home } from "./App";
 import { Calculator } from "./Calculator";
@@ -13,7 +13,7 @@ root.render(
         <Route path='/embedded' element={<Calculator />} />
         <Route path='/' element={<App />}>
           <Route path='/' element={<Home />} />
-          <Route path='calculator' element={<Calculator />} />
+          <Route path='scorekaart' element={<Calculator />} />
           <Route path='about' element={<About />} />
         </Route>
       </Routes>

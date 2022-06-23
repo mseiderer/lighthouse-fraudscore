@@ -3,7 +3,7 @@ export const Questions = [
     id: "kernvariabelen",
     component: "section",
     title: "Kernvariabelen",
-    text: "TK these questions add a fixed amount to the final score or whatever.",
+    text: "De antwoorden op deze vragen voegen een vast puntenaantal toe aan de uiteindelijke risicoscores",
   },
   {
     id: "arbeidsuren",
@@ -266,7 +266,7 @@ export const Questions = [
     id: "versterkende_variabelen",
     component: "section",
     title: "Versterkende variabelen",
-    text: "These questions do some multiplication magic to the score.",
+    text: "Sommige antwoorden op deze vragen hebben een vermenigvuldigingsfactor die de uiteindelijke score verhogen",
   },
   {
     id: "woonlasten",
@@ -409,6 +409,18 @@ export const Questions = [
     id: "results",
     component: "section",
     title: "Results",
-    text: "Lorem ipsum here are the results. Everything over 1000 is high and triggers some protocol yolo.",
+    text: [
+      <p>
+        Hieronder vind je de scores die gebaseerd zijn op de antwoorden die je
+        hebt gegeven. Bij de fraudescorekaart worden alle scores boven 1000
+        gezien als 'hoog risico'.
+      </p>,
+      <p>
+        Er is geen gestandaardiseerde wijze waarop de kaart werd gebruikt door
+        gemeenten. In sommige gemeenten werden mensen met een hoge score vaker
+        en strenger gecontroleerd, bijvoorbeeld door middel van een huisbezoek,
+        in vergelijking met mensen met een lage score.
+      </p>,
+    ],
   },
 ];

@@ -90,39 +90,30 @@ export const Calculator = () => {
     <div className='Calculator'>
       <div className='calculator-intro'>
         <div>
-          <h1>This is the headline</h1>
-          <div>
+          <h1>Fraudescorekaart</h1>
+          <div className='calculator-intro'>
             <p>
-              Select a model (you can change it later) and click some buttons
-              yolo. If you don’t feel like clicking some buttons, start with a
-              pre-filled example:
+              Bijna twintig jaar lang gebruikten verschillende Nederlandse
+              gemeenten de fraudescorekaart om mensen met een bijstandsuitkering
+              te profileren op frauderisico. In maart 2022 verkreeg Lighthouse
+              Reports de fraudescorekaart via een Wob-verzoek.
+            </p>
+            <p>
+              Hieronder vind je een interactieve reconstructie van de
+              fraudescorekaart. Deze reconstructie bevat dezelfde vragen,
+              antwoorden en berekeningen als de fraudescorekaart die Lighthouse
+              Reports heeft ontvangen.
             </p>
             {/* TODO */}
-            <p>Example for high address fraud risk</p>
-            <p>Example for high white fraud risk</p>
+            {/* <p>Example for high address fraud risk</p>
+            <p>Example for high white fraud risk</p> */}
           </div>
         </div>
-        {/* TODO */}
-        <Button onClick={() => navigate("arbeidsuren")}>Start</Button>
+        <div className='calculator-start-button'>
+          <Button onClick={() => navigate("arbeidsuren")}>Start</Button>
+        </div>
       </div>
-      <div className='calculator-form'>
-        {/* <Question
-          id='score'
-          onChange={(_, value) => setSelectedScore(value)}
-          options={[
-            { label: "Witte fraude", value: "witteFraude" },
-            { label: "Grijze fraude", value: "grijzeFraude" },
-            { label: "Zwarte fraude", value: "zwarteFraude" },
-            { label: "Vermogensfraude", value: "vermogensfraude" },
-            { label: "Samenlevingsfraude", value: "samenlevingsfraude" },
-            { label: "Adresfraude", value: "adresfraude" },
-          ]}
-          text='Select a score to see how your answers affect it. You get results for all scores at the end.'
-          title='Scoring algorithm'
-          value={selectedScore}
-        /> */}
-        {form}
-      </div>
+      <div className='calculator-form'>{form}</div>
       <ResultsTable
         results={results}
         selected={selectedScore}
@@ -315,8 +306,8 @@ export const Result = ({ title, description, score, onSelect, selected }) => {
             </Button>
           )}
           <div className='info-label'>
-            Select this scoring algorithm and see how your answers influence the
-            score.
+            Klik hier om te kijken hoe jouw antwoorden de score voor deze vorm
+            van fraude hebben beïnvloed
           </div>
         </div>
       </div>

@@ -14,19 +14,19 @@ export const App = () => {
             Home
           </NavLink>
           <NavLink
-            to='/calculator'
+            to='/scorekaart'
             className={({ isActive }) => (isActive ? "active" : undefined)}
           >
-            Calculator
+            Scorekaart
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to='/about'
             className={({ isActive }) => (isActive ? "active" : undefined)}
           >
             About
-          </NavLink>
+          </NavLink> */}
         </nav>
-        <Link to='#'>NL</Link>
+        {/* <Link to='#'>NL</Link> */}
       </div>
       <Outlet />
     </div>
@@ -37,24 +37,35 @@ export const Home = () => {
   return (
     <div className='Home'>
       <div className='hero'>
-        <h1>How the Dutch state calculates welfare things lorem ipsum</h1>
+        <h1>
+          Hoe Nederlandse gemeenten frauderisicoscores berekenden van mensen met
+          een bijstandsuitkering – en sommige gemeenten dit nog steeds doen
+        </h1>
         <div className='hero-caption'>
           <p>
-            The investigative journalists at lightvessel acquired an Excel
-            spreadsheet and made a website
+            Lighthouse Reports heeft inzage gekregen in de fraudescorekaart; een
+            spreadsheet en simpel algoritme gebruikt om mensen met een
+            bijstandsuitkering te profileren op frauderisico.
+          </p>
+          <p>
+            Om te laten zien hoe deze kaart werkt hebben we deze interactieve
+            reconstructie ontwikkeld.
           </p>
         </div>
       </div>
       <div className='cta-buttons'>
-        <Button>Calculate your score</Button>
-        <Button secondary>Read more at NRC</Button>
-        <Button secondary>Read more at VPRO</Button>
+        <Link to='/scorekaart'>
+          <Button>Bereken je score</Button>
+        </Link>
+        <a href='https://nrc.nl' target='_blank' rel='noreferrer'>
+          <Button secondary>Lees meer bij NRC</Button>
+        </a>
+        <a href='https://vpro.nl' target='_blank' rel='noreferrer'>
+          <Button secondary>Lees meer bij de VPRO</Button>
+        </a>
       </div>
       <div className='credits'>
-        <p>
-          A project by Lightvessel Reports, VPRO, some American foundation and a
-          range of other people
-        </p>
+        <p>Een project van Lighthouse Reports, VPRO en NRC.</p>
       </div>
     </div>
   );
